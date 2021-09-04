@@ -36,7 +36,7 @@ postData(req.body.title,req.body.discription,user_id,req.body.image)
 
     
     .then(()=>res.redirect('/'))
-    .catch((error)=>{console.log(error)})
+    .catch(()=> res.sendFile(join(__dirname, '..', '..', 'public', '400.html')))
 });
 router.get('/sign-in',(req,res)=>{
   res.sendFile(join(__dirname,'..','..','public','sign-in.html'))
@@ -134,8 +134,8 @@ router.get('/check-user', auth, (req, res) => {
    
     deleted(postId)
     .then(() => res.redirect('/'))
-    .catch((error) => {
-     console.log(error)
+    .catch(() => {
+       res.sendFile(join(__dirname, '..', '..', 'public', '400.html'))
     });
   })
 
@@ -147,13 +147,13 @@ router.get('/check-user', auth, (req, res) => {
     console.log(req.body.content)
     addComment(req.body.content,user_id)
     .then(()=>res.redirect('/'))
-    .catch((error)=>console.log(error))
+    .catch(()=> res.sendFile(join(__dirname, '..', '..', 'public', '400.html')))
 
   })
   router.get('/getComment',(req,res)=>{
     getComment()
     .then((result) => res.json(result))
-    .catch((err) => err);
+    .catch((res) => res.status(400));
    })
 
   router.get('/comment',(req,res)=>{
