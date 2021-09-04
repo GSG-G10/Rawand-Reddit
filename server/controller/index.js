@@ -26,7 +26,6 @@ router.get('/post', (req, res) => {
   
 router.post('/post-data', (req, res) => {
   
-  console.log(post_id)
   const cookies = req.cookies.access_token;
    
   const decoded = jwt.decode(cookies);
@@ -94,6 +93,7 @@ router.post('/sign-up',(req,res)=>{
         signUpHandel(name, email,hashedPassword, )
           .then(() => res.redirect('/sign-in'))
           .catch(() => {
+         
             res.cookie('error', 'This email already used');
             res.redirect('/sign-up');
           });
